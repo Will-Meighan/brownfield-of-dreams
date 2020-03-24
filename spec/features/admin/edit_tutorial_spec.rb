@@ -8,12 +8,14 @@ describe "An Admin can edit a tutorial" do
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(admin)
 
     visit edit_admin_tutorial_path(tutorial)
+    # save_and_open_page
 
     click_on "Add Video"
-
+    # require "pry"; binding.pry
     fill_in "video[title]", with: "How to tie your shoes."
     fill_in "video[description]", with: "Over, under, around and through, Meet Mr. Bunny Rabbit, pull and through."
     fill_in "video[video_id]", with: "J7ikFUlkP_k"
+    # save_and_open_page
     click_on "Create Video"
 
     expect(current_path).to eq(edit_admin_tutorial_path(tutorial))
