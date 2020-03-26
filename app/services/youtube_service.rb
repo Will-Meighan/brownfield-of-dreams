@@ -8,7 +8,6 @@ class YoutubeService
   private
 
   def get_json(url, params)
-    # require "pry"; binding.pry
     response = conn.get("youtube/v3/videos", params)
     JSON.parse(response.body, symbolize_names: true)
   end
@@ -16,7 +15,6 @@ class YoutubeService
   def conn
     Faraday.new(url: "https://www.googleapis.com") do |f|
       f.adapter  Faraday.default_adapter
-      # require "pry"; binding.pry
       f.params[:key] = ENV['YOUTUBE_API_KEY']
     end
   end

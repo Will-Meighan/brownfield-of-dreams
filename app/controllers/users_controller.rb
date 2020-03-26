@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   def show
+    github = GithubService.new
+    raw = github.user_info(current_user)
   end
 
   def new
