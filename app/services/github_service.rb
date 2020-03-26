@@ -1,11 +1,6 @@
 class GithubService
   def user_info(user)
-    require "pry"; binding.pry
-    user.user_name
-    user.uid
-    user.token
-
-    params = {username: user.username, #"snippet,contentDetails,statistics"
+    params = {username: user.username,
               uid: user.uid,
               token: user.token}
 
@@ -15,15 +10,14 @@ class GithubService
   private
 
   def get_json(url, params)
-    response = conn.get(url, {"Authorization: token #{params[:token]}")
+    access_token = params[:token]
+    response = conn.get(url, {authorization: conn.headers[:authorization]})
     JSON.parse(response.body, symbolize_names: true)
   end
 
   def conn
-    Faraday.new(url: "https://api.github.com")
-    # do |f|
-    #   f.adapter  Faraday.default_adapter
-    #   f.params[:key] = '56d941ecb3407ba2c26eeee38a59db5006751986'#ENV['GITHUB_API_KEY']
-    # end
+    Faraday.new("https://api.github.com") do |f|
+      f.headers[:authorization] = "token #{ENV["GITHUB_API_KEY"]}"
+    end
   end
 end
