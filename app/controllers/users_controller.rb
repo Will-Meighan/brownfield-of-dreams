@@ -1,5 +1,10 @@
 class UsersController < ApplicationController
   def show
+    #put github here
+    # require "pry"; binding.pry
+    # user = current_user
+    github = GithubService.new
+    github.user_info(current_user)
   end
 
   def new

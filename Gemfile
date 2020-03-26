@@ -11,7 +11,6 @@ gem 'coffee-rails', '~> 4.2'
 gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bcrypt', '~> 3.1.7'
-gem 'rubocop', '~> 0.80.1', require: false
 
 gem 'webpacker', '~> 3.5'
 
@@ -28,6 +27,7 @@ gem 'will_paginate'
 gem 'acts-as-taggable-on', '~> 6.0'
 gem 'omniauth-census', git: "https://github.com/turingschool-projects/omniauth-census"
 gem 'rubocop', '~> 0.80.1', require: false
+gem 'rubocop-faker'
 
 
 group :development, :test do
