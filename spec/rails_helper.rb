@@ -14,6 +14,8 @@ VCR.configure do |config|
   config.hook_into :webmock
   config.configure_rspec_metadata!
   config.filter_sensitive_data("<YOUTUBE_API_KEY>") { ENV['YOUTUBE_API_KEY'] }
+  config.allow_http_connections_when_no_cassette = true
+  config.default_cassette_options = {:record => :new_episodes}
 end
 
 
@@ -49,4 +51,8 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
 
   config.filter_rails_from_backtrace!
+end
+
+Capybara.configure do |config|
+  config.server = :puma, { Silent: true }
 end
