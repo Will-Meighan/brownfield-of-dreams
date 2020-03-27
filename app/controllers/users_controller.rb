@@ -1,35 +1,10 @@
 class UsersController < ApplicationController
   def show
-    github = GithubService.new
-    raw_repos = github.user_info(current_user, 'repos')
+    github = Github.new
 
-    if raw_repos.count == 2
-      @repos = nil
-    else
-      @repos = raw_repos.map do |row|
-        Repository.create(url: row[:owner][:html_url], name: row[:name])
-      end
-    end
-
-    raw_followers = github.user_info(current_user, 'followers')
-
-    if raw_followers.count == 2 || raw_followers == []
-      @followers = nil
-    else
-      @followers = raw_followers.map do |row|
-        Follower.create(url: row[:html_url], name: row[:login])
-      end
-    end
-
-    raw_following = github.user_info(current_user, 'following')
-
-    if raw_following.count == 2 || raw_following == []
-      @following = nil
-    else
-      @following = raw_following.map do |row|
-        Following.create(url: row[:html_url], name: row[:login])
-      end
-    end
+    @repos = github.get_data('repos', Repository, current_user)
+    @followers = github.get_data('followers', Follower, current_user)
+    @following = github.get_data('following', Following, current_user)
   end
 
   def new
