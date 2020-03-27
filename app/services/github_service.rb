@@ -1,10 +1,10 @@
 class GithubService
-  def user_info(user)
+  def user_info(user, type)
     params = {username: user.username,
               uid: user.uid,
               token: user.token}
 
-    get_json("/user/repos", params)
+    get_json("/user/#{type}", params)
   end
 
   private
