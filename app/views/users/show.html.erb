@@ -7,7 +7,36 @@
     <li> <%= current_user.first_name  %> <%= current_user.last_name %> </li>
     <li> <%= current_user.email%> </li>
   </ul>
-  <h3>Github</h3>
+
+  <section>
+    <h1>Github</h1>
+    <% if @repos != nil %>
+      <h3>Repositories</h3>
+      <ul>
+        <% @repos.each do |repo| %>
+        <li><%= link_to repo.name, repo.url %></li>
+        <% end %>
+      </ul>
+      <% end %>
+
+      <% if @followers != nil %>
+      <h3>Followers</h3>
+      <ul>
+        <% @followers.each do |follower| %>
+        <li><%= link_to follower.name, follower.url %></li>
+        <% end %>
+      </ul>
+      <% end %>
+
+      <% if @following != nil %>
+      <h3>Following</h3>
+      <ul>
+        <% @following.each do |follow| %>
+        <li><%= link_to follow.name, follow.url %></li>
+        <% end %>
+      </ul>
+    <% end %>
+  </section>
   <section>
     <h1>Bookmarked Segments</h1>
   </section>
