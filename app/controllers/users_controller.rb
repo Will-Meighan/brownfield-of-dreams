@@ -1,10 +1,8 @@
 class UsersController < ApplicationController
   def show
-    github = Github.new
-
-    @repos = github.get_data('repos', Repository, current_user)
-    @followers = github.get_data('followers', Follower, current_user)
-    @following = github.get_data('following', Following, current_user)
+    render locals: {
+      user_dashboard_facade: UserDashboardFacade.new(current_user)
+    }
   end
 
   def new

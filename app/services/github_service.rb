@@ -1,23 +1,32 @@
 class GithubService
-  def user_info(user, type)
-    params = {username: user.username,
-              uid: user.uid,
-              token: user.token}
+  def initialize(github_token)
+    @github_token = github_token
+  end
 
-    get_json("/user/#{type}", params)
+  def get_repos
+    get_json('/user/repos?page=1&per_page=5&affiliation=owner')
+  end
+
+  def get_followers
+    get_json('/user/followers')
+  end
+
+  def get_following
+    get_json('/user/following')
   end
 
   private
 
-  def get_json(url, params)
-    access_token = params[:token]
-    response = conn.get(url, {authorization: conn.headers[:authorization]})
-    JSON.parse(response.body, symbolize_names: true)
-  end
-
-  def conn
-    Faraday.new("https://api.github.com") do |f|
-      f.headers[:authorization] = "token #{ENV["GITHUB_API_KEY"]}"
+    def conn
+      Faraday.new(url: 'https://api.github.com/') do |faraday|
+        faraday.headers['Authorization'] = "token #{@github_token}"
+        faraday.adapter Faraday.default_adapter
+      end
     end
-  end
+
+    def get_json(url)
+      response = conn.get(url)
+      JSON.parse(response.body, symbolize_names: true)
+    end
+
 end
