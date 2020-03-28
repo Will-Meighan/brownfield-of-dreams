@@ -8,36 +8,31 @@
     <li> <%= current_user.email%> </li>
   </ul>
 
-  <section>
-    <h1>Github</h1>
-    <% if @repos != nil %>
-      <h3>Repositories</h3>
-      <ul>
-        <% @repos.each do |repo| %>
-        <li><%= link_to repo.name, repo.url %></li>
-        <% end %>
-      </ul>
+  <h1>Github Repos</h1>
+  <% if user_dashboard_facade.token %>
+    <ul>
+      <% user_dashboard_facade.repos.each do |repo|%>
+          <li><%= link_to repo.name, repo.url %></li>
       <% end %>
+    </ul>
+  <% end %>
 
-      <% if @followers != nil %>
-      <h3>Followers</h3>
-      <ul>
-        <% @followers.each do |follower| %>
-        <li><%= link_to follower.name, follower.url %></li>
-        <% end %>
-      </ul>
-      <% end %>
-
-      <% if @following != nil %>
-      <h3>Following</h3>
-      <ul>
-        <% @following.each do |follow| %>
-        <li><%= link_to follow.name, follow.url %></li>
-        <% end %>
-      </ul>
+  <h1>Github Followers</h1>
+  <ul>
+    <% user_dashboard_facade.followers.each do |follower|%>
+        <li><%= link_to follower.handle, follower.url %>
     <% end %>
-  </section>
+  </ul>
+
+  <h1>Following on Github</h1>
+  <ul>
+    <% user_dashboard_facade.following.each do |follow|%>
+        <li><%= link_to follow.handle, follow.url %></li>
+    <% end %>
+  </ul>
+
   <section>
     <h1>Bookmarked Segments</h1>
   </section>
+
 </section>
