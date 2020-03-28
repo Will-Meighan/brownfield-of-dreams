@@ -3,7 +3,7 @@ class UserDashboardFacade
 
   def initialize(user)
     @user = user
-    @token = user.github_token
+    @token = user.token
   end
 
   def repos
