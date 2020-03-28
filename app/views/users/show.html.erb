@@ -11,7 +11,7 @@
   <h1>Github</h1>
 
   <% if !user_dashboard_facade.token %>
-    <%= link_to "Connect Github" %>
+    <%= link_to "Connect Github", "https://github.com/login/oauth/authorize?client_id=#{ENV["GITHUB_CLIENT_ID"]}&scope=repo" %>
   <% else %>
     <h3>Github Repos</h3>
       <ul>
