@@ -1,13 +1,25 @@
 require 'rails_helper'
 
-describe 'Github Service' do
-  it 'can show repositories' do
-    user1 = create(:user, token: ENV['GITHUB_API_KEY'])
-  end
+describe GithubService do
+  context "instance methods" do
+    context "#get_reops" do
+      it "returns user repos" do
 
-  it 'can show followers' do
-  end
+        repo_fixture = File.read('spec/fixtures/repo.json')
 
-  it 'can show following' do
+        stub_request(:get, "https://api.github.com/user/repos?page=1&per_page=5&affiliation=owner").to_return(status: 200, body: repo_fixture)
+
+        github_service = GithubService.new(ENV["GITHUB_TEST_TOKEN_2"])
+        repos = github_service.get_repos
+
+        expect(repos).to be_a Array
+        expect(repos.count).to eq 1
+
+        repo = repos.first
+
+        expect(repo).to have_key :name
+        expect(repo).to have_key :html_url
+      end
+    end
   end
 end
