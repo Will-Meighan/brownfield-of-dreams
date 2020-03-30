@@ -1,5 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Follower, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it 'has attributes' do
+    handle = 'kathleen-carroll'
+    url = 'https://github.com/kathleen-carroll'
+    id = 5940848
+    info = {login: handle, html_url: url, id: id}
+
+    follower = Follower.new(info)
+  end
 end
