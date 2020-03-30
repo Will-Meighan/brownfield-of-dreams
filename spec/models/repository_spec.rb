@@ -1,5 +1,17 @@
 require 'rails_helper'
 
-RSpec.describe Repository, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe Repository do
+  it "exists" do
+    attrs = {
+      name: "Brownfield",
+      html_url: "https://brownfield.com"
+    }
+
+    repo = Repository.new(attrs)
+
+    expect(repo).to be_a Repository
+
+    expect(repo.name).to eq("Brownfield")
+    expect(repo.url).to eq("https://brownfield.com")
+  end
 end
