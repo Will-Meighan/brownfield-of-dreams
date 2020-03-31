@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'User' do
-  xit 'user can add friend'do
+  xit 'user can add friend' do
     repo_fixture = File.read('spec/fixtures/repo.json')
 
     stub_request(:get, "https://api.github.com/user/repos?page=1&per_page=5").
