@@ -8,5 +8,7 @@ RSpec.describe Follower, type: :model do
     info = {login: handle, html_url: url, id: id}
 
     follower = Follower.new(info)
+
+    expect(follower.handle).to eq(handle)
   end
 end
