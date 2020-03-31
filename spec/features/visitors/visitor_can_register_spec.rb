@@ -33,4 +33,26 @@ describe 'visitor can create an account', :js do
     expect(page).to have_content(last_name)
     expect(page).to_not have_content('Sign In')
   end
+
+  it 'cannot sign up with existing email' do
+    user1 = create(:user, email: 'jimbob@aol.com')
+
+    email = 'jimbob@aol.com'
+    first_name = 'Jim'
+    last_name = 'Bob'
+    password = 'password'
+    password_confirmation = 'password'
+
+    visit '/users/new'
+
+    fill_in "user[email]", with: "jimbob@aol.com"
+    fill_in "First name", with: "Jim"
+    fill_in 'user[last_name]', with: 'last_name'
+    fill_in 'user[password]', with: 'password'
+    fill_in 'user[password_confirmation]', with: 'password'
+
+    click_on'Create Account'
+
+    expect(page).to have_content('Username already exists')
+  end
 end
