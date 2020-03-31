@@ -28,6 +28,7 @@ gem 'acts-as-taggable-on', '~> 6.0'
 gem 'omniauth-census', git: "https://github.com/turingschool-projects/omniauth-census"
 gem 'rubocop', '~> 0.80.1', require: false
 gem 'rubocop-faker'
+gem 'omniauth-github', github: 'omniauth/omniauth-github', branch: 'master'
 
 
 group :development, :test do

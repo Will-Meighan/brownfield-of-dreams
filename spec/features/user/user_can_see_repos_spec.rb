@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'A registered user' do
-    scenario 'can view repos with token' do
+    scenario 'can view repos with token'do
         repo_fixture = File.read('spec/fixtures/repo.json')
 
         stub_request(:get, "https://api.github.com/user/repos?page=1&per_page=5").
@@ -29,6 +29,6 @@ describe 'A registered user' do
       visit '/dashboard'
 
       expect(page).to_not have_content("Github Repos")
-      expect(page).to have_link("adopt_dont_shop")
+      expect(page).to_not have_link("adopt_dont_shop")
     end
 end
