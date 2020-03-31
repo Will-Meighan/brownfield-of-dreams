@@ -10,4 +10,14 @@ class User < ApplicationRecord
 
   enum role: [:default, :admin]
   has_secure_password
+
+
+  def bookmarks
+    videos = Video.joins(:user_videos).where("user_videos.user_id = #{self.id}").order(:tutorial_id).order(:position)
+
+    videos.inject(Hash.new([])) do |bookmarks, video|
+      (bookmarks[video.tutorial_id] = []).push(video)
+      bookmarks
+    end
+  end
 end
