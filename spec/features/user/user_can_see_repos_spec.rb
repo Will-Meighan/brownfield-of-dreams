@@ -29,6 +29,6 @@ describe 'A registered user' do
       visit '/dashboard'
 
       expect(page).to_not have_content("Github Repos")
-      expect(page).to have_link("adopt_dont_shop")
+      expect(page).to_not have_link("adopt_dont_shop")
     end
 end
