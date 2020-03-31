@@ -7,4 +7,8 @@ class Follower
     @uid = info[:id]
   end
 
+  def addable?
+    !User.find_by(username: self.handle).nil?
+  end
+
 end

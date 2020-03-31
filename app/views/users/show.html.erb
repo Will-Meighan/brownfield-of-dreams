@@ -11,7 +11,7 @@
   <h1>Github</h1>
 
   <% if !user_dashboard_facade.token %>
-    <%= link_to "Connect Github",  github_login_path%> 
+    <%= link_to "Connect Github",  github_login_path%>
   <% else %>
     <h3>Github Repos</h3>
       <ul>
@@ -20,12 +20,15 @@
         <% end %>
       </ul>
 
+    <section id='github-followers'>
     <h3>Github Followers</h3>
     <ul>
       <% user_dashboard_facade.followers.each do |follower|%>
           <li><%= link_to follower.handle, follower.url %>
+            <%= link_to "Add Friend", add_friend_path if follower.addable?%>
       <% end %>
     </ul>
+    </section>
 
     <h3>Following on Github</h3>
     <ul>
