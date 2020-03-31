@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'A registered user' do
-    scenario 'can view repos with token', :vcr do
+    scenario 'can view repos with token'do
         repo_fixture = File.read('spec/fixtures/repo.json')
 
         stub_request(:get, "https://api.github.com/user/repos?page=1&per_page=5").
