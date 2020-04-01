@@ -6,6 +6,9 @@
   <ul>
     <li> <%= current_user.first_name  %> <%= current_user.last_name %> </li>
     <li> <%= current_user.email%> </li>
+    <% if !current_user.active? %>
+      <li> Status: Inactive </li>
+    <% end %>
   </ul>
 
   <h1>Github</h1>
