@@ -20,7 +20,7 @@ describe 'A registered user' do
 
       click_on "Send Invite"
       expect(current_path).to eq("/dashboard")
-      expect(page).to have_content("Successfully sent invite!")
+      expect(page).to_not have_content("Successfully sent invite!")
       expect(page).to have_content("The Github user you selected doesn't have an email address associated with their account.")
   end
 end
