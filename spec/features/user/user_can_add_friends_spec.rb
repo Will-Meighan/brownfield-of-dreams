@@ -20,6 +20,18 @@ describe 'User' do
       expect(page).to have_content('kathleen-carroll')
 
       click_on "Add Friend"
+      expect(page).to_not have_content("Add Friend")
+    end
+
+    within "#following" do
+      expect(page).to_not have_link("Add Friend")
+      expect(page).to have_content('kathleen-carroll')
+    end
+
+    within "#friends" do
+      expect(page).to have_content("Friends")
+      expect(page).to have_content('kathleen-carroll')
+      expect(page).to_not have_content('theborg10')
     end
   end
 end
