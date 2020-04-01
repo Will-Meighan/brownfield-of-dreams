@@ -24,14 +24,26 @@ describe 'visitor can create an account', :js do
     fill_in 'user[password]', with: password
     fill_in 'user[password_confirmation]', with: password
 
-    click_on'Create Account'
+    expect do
+      click_on "Create Account"
+    end.
+    to change { ActionMailer::Base.deliveries.count }.by(1)
 
     expect(current_path).to eq(dashboard_path)
-
     expect(page).to have_content(email)
     expect(page).to have_content(first_name)
     expect(page).to have_content(last_name)
     expect(page).to_not have_content('Sign In')
+    expect(page).to have_content("Logged in as #{first_name}.")
+    expect(page).to have_content("This account has not yet been activated. Please check your email.")
+    expect(page).to have_content("Status: Inactive")
+
+    user = User.last
+
+    visit "/activate/#{user.id}"
+
+    expect(current_path).to eq(dashboard_path)
+    expect(page).to_not have_content("Status: Inactive")
   end
 
   it 'cannot sign up with existing email' do
