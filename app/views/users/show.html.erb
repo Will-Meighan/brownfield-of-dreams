@@ -52,6 +52,12 @@
 
   <section>
     <h1>Bookmarked Segments</h1>
+    <% current_user.bookmarks.each do |_tutorial, video| %>
+      <h3><%= video[0].tutorial.title %></h3>
+      <% video.each do |video| %>
+        <li><%= video.title %>
+      <% end %>
+    <% end %>
   </section>
 
 </section>
