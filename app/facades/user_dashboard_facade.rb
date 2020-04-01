@@ -33,4 +33,10 @@ class UserDashboardFacade
     end
   end
 
+  def friends
+    # require "pry"; binding.pry
+    # @user.friends
+    Friend.joins(:user).where("user_id = #{@user.id}")
+  end
+
 end

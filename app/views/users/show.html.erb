@@ -20,20 +20,35 @@
         <% end %>
       </ul>
 
+    <section id='github-followers'>
     <h3>Github Followers</h3>
     <ul>
       <% user_dashboard_facade.followers.each do |follower|%>
           <li><%= link_to follower.handle, follower.url %>
+            <%= link_to "Add Friend", add_friend_path(follower.handle) if (follower.addable? && !follower.already_friend?)%>
       <% end %>
     </ul>
+    </section>
 
+    <section id='following'>
     <h3>Following on Github</h3>
     <ul>
       <% user_dashboard_facade.following.each do |follow|%>
-          <li><%= link_to follow.handle, follow.url %></li>
+          <li><%= link_to follow.handle, follow.url %>
+          <%= link_to "Add Friend", add_friend_path(follow.handle) if (follow.addable? && !follow.already_friend?)%></li>
       <% end %>
     </ul>
   <% end %>
+  </section>
+
+  <section id='friends'>
+    <%if user_dashboard_facade.friends != [] %>
+    <h1>Friends</h1>
+        <% user_dashboard_facade.friends.each do |friend| %>
+          <li><%= friend.get_name %></li>
+        <% end %>
+    <% end %>
+  </section>
 
   <section>
     <h1>Bookmarked Segments</h1>
