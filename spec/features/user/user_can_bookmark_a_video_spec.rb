@@ -31,4 +31,32 @@ describe 'A registered user' do
     click_on 'Bookmark'
     expect(page).to have_content("Already in your bookmarks")
   end
+
+  it 'can see all bookmarked segments on dashboard' do
+    tutorial_1 = create(:tutorial)
+    tutorial_2 = create(:tutorial)
+    video_1 = create(:video, tutorial: tutorial_1, position: 1)
+    video_2 = create(:video, tutorial: tutorial_1, position: 2)
+    video_3 = create(:video, tutorial: tutorial_2, position: 1)
+    user = User.create!(email: 'will@example.com', first_name: 'Will', last_name: 'Meighan', password:  "password", role: :default, token: ENV['GITHUB_TEST_TOKEN_2'])
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+
+    visit tutorial_path(tutorial_1)
+    click_on 'Bookmark'
+    click_on tutorial_1.videos[0].title
+    click_on 'Bookmark'
+
+    visit tutorial_path(tutorial_2)
+    click_on 'Bookmark'
+    click_on tutorial_2.videos[0].title
+    click_on 'Bookmark'
+
+    visit dashboard_path
+
+    expect(page).to have_content(tutorial_1.title)
+    expect(page).to have_content(video_1.title)
+
+    expect(page).to have_content(tutorial_2.title)
+    expect(page).to have_content(video_3.title)
+  end
 end

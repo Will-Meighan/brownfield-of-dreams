@@ -11,7 +11,7 @@
   <h1>Github</h1>
 
   <% if !user_dashboard_facade.token %>
-    <%= link_to "Connect Github",  github_login_path%> 
+    <%= link_to "Connect Github",  github_login_path%>
   <% else %>
     <h3>Github Repos</h3>
       <ul>
@@ -37,6 +37,12 @@
 
   <section>
     <h1>Bookmarked Segments</h1>
+    <% current_user.bookmarks.each do |_tutorial, video| %>
+      <h3><%= video[0].tutorial.title %></h3>
+      <% video.each do |video| %>
+        <li><%= video.title %>
+      <% end %>
+    <% end %>
   </section>
 
 </section>
