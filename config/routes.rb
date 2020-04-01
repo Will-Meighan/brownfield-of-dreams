@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   get '/dashboard', to: 'users#show'
   get '/about', to: 'about#show'
   get '/get_started', to: 'get_started#show'
+  get '/friends/:handle', to: 'friends#new', as: 'add_friend'
 
   # Is this being used?
   get '/video', to: 'video#show'
