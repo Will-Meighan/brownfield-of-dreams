@@ -20,7 +20,7 @@ class InvitesController < ApplicationController
   private
 
   def send_invite(github_user, inviter)
-    InvitationMailer.invite(github_user).deliver_now
+    InvitationMailer.invite(github_user, inviter).deliver_now
   end
 
   def api_conn

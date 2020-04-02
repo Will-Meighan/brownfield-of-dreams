@@ -15,8 +15,16 @@ describe 'A registered user' do
 
       click_on ("Send Invite")
       expect(current_path).to eq('/invite')
-# save_and_open_page
+
       fill_in :handle, with: "kathleen-carroll"
+
+      click_on "Send Invite"
+      expect(current_path).to eq("/dashboard")
+      expect(page).to have_content("Successfully sent invite!")
+      expect(page).to_not have_content("The Github user you selected doesn't have an email address associated with their account.")
+
+      click_on ("Send Invite")
+      fill_in :handle, with: "Will-Meighan"
 
       click_on "Send Invite"
       expect(current_path).to eq("/dashboard")
