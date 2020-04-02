@@ -28,6 +28,8 @@ Rails.application.routes.draw do
   post '/login', to: "sessions#create"
   delete '/logout', to: "sessions#destroy"
   get '/activate/:id', to: "activate#create"
+  get '/invite', to: "invites#new", as: 'new_invite'
+  post '/invite', to: "invites#create"
   get 'auth/github', as: 'github_login'
   get '/auth/github/callback', to: 'sessions#github'
 
