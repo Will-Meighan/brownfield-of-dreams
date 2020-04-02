@@ -13,7 +13,8 @@ class UsersController < ApplicationController
     user = User.create(user_params)
     if user.save
       session[:user_id] = user.id
-      send_activation_email(user)
+      # commenting out due to no email in production
+      # send_activation_email(user)
       redirect_to dashboard_path
     else
       @user = User.new
