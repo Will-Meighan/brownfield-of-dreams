@@ -2,7 +2,7 @@
   <main>
 <h4>Register</h4>
   <section>
-    <%= form_for @user do |form| %>
+    <%= form_for @user, url: dashboard_path do |form| %>
       <div >
         <%= form.label :email %>
         <%= form.email_field :email, class: "block col-12 field" %>
