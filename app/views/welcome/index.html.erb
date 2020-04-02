@@ -1,10 +1,7 @@
-<div class="home-page-title">
-  <h1>Video Tutorials</h1>
-  <hr>
-</div>
+<h1>Video Tutorials</h1>
 <section class="tutorials col md-col-8">
   <% @tutorials.each do |tutorial| %>
-    <div class="tutorial">
+    <div class="tutorial" id = "tutorial-<%= tutorial.id %>">
       <img class="thumbnail col md-col-3" src= <%="#{tutorial.thumbnail}" %> >
       <div class="tutorial-description col md-col-9">
         <h4 class="tutorial-title-home"><%= link_to tutorial.title, tutorial_path(tutorial), class: "title-link" %> </h4>
@@ -18,6 +15,7 @@
     <%= will_paginate @tutorials %>
   </div>
 </section>
+
 <aside class="categories col md-col-4">
   <h1>Filters:</h1>
   <hr>
