@@ -8,7 +8,7 @@ class InvitesController < ApplicationController
     if invited.values.include?("Bad credentials")
       flash[:failure] = "Please connect to github before sending invites"
     elsif !invited[:email].nil?
-      send_invite(invited[:email])
+      send_invite(invited, current_user)
       flash[:success] = "Successfully sent invite!"
     elsif invited[:email].nil?
       flash[:failure] = "The Github user you selected doesn't have an email address associated with their account."
@@ -19,8 +19,8 @@ class InvitesController < ApplicationController
 
   private
 
-  def send_invite(email)
-    InvitationMailer.invite(email).deliver_now
+  def send_invite(github_user, inviter)
+    InvitationMailer.invite(github_user).deliver_now
   end
 
   def api_conn
