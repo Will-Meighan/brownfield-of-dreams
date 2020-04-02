@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe 'visitor can create an account', :js do
@@ -24,10 +26,8 @@ describe 'visitor can create an account', :js do
     fill_in 'user[password]', with: password
     fill_in 'user[password_confirmation]', with: password
 
-    expect do
-      click_on "Create Account"
-    end.
-    to change { ActionMailer::Base.deliveries.count }.by(1)
+    click_on 'Create Account'
+
 
     expect(current_path).to eq(dashboard_path)
     expect(page).to have_content(email)
@@ -35,15 +35,15 @@ describe 'visitor can create an account', :js do
     expect(page).to have_content(last_name)
     expect(page).to_not have_content('Sign In')
     expect(page).to have_content("Logged in as #{first_name}.")
-    expect(page).to have_content("This account has not yet been activated. Please check your email.")
-    expect(page).to have_content("Status: Inactive")
+    expect(page).to have_content('This account has not yet been activated. Please check your email.')
+    expect(page).to have_content('Status: Inactive')
 
     user = User.last
 
     visit "/activate/#{user.id}"
 
     expect(current_path).to eq(dashboard_path)
-    expect(page).to_not have_content("Status: Inactive")
+    expect(page).to_not have_content('Status: Inactive')
   end
 
   it 'cannot sign up with existing email' do
@@ -57,8 +57,8 @@ describe 'visitor can create an account', :js do
 
     visit '/users/new'
 
-    fill_in "user[email]", with: "jimbob@aol.com"
-    fill_in "First name", with: "Jim"
+    fill_in 'user[email]', with: 'jimbob@aol.com'
+    fill_in 'First name', with: 'Jim'
     fill_in 'user[last_name]', with: 'last_name'
     fill_in 'user[password]', with: 'password'
     fill_in 'user[password_confirmation]', with: 'password'

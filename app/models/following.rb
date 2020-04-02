@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Following
   attr_reader :handle, :url, :uid
 
@@ -8,13 +10,14 @@ class Following
   end
 
   def addable?
-    !User.find_by(username: self.handle).nil?
+    !User.find_by(username: handle).nil?
     # User.where("token != null")
   end
 
   def already_friend?
-    user = User.find_by(username: self.handle)
-    !Friend.joins(:user).where("friend_user_id = #{user.id}").first.nil? if !user.nil?
+    user = User.find_by(username: handle)
+    unless user.nil?
+      !Friend.joins(:user).where("friend_user_id = #{user.id}").first.nil?
+    end
   end
-
 end

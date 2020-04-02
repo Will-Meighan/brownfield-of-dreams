@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   has_many :user_videos
   has_many :videos, through: :user_videos
@@ -8,16 +10,14 @@ class User < ApplicationRecord
   validates_presence_of :first_name
   validates_presence_of :last_name
 
-  enum role: [:default, :admin]
+  enum role: %i[default admin]
   has_secure_password
 
-
   def bookmarks
-    videos = Video.joins(:user_videos).where("user_videos.user_id = #{self.id}").order(:tutorial_id).order(:position)
+    videos = Video.joins(:user_videos).where("user_videos.user_id = #{id}").order(:tutorial_id).order(:position)
 
-    videos.inject(Hash.new([])) do |bookmarks, video|
+    videos.each_with_object(Hash.new([])) do |video, bookmarks|
       (bookmarks[video.tutorial_id] = []).push(video)
-      bookmarks
     end
   end
 end
