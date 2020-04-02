@@ -2,6 +2,7 @@
 <h2><%= @facade.title %></h2>
 <h1 id="message"></h1>
 <div class="col col-4">
+<% if !@facade.current_video.nil? %>
   <h4>Videos</h4>
   <ul>
     <% @facade.videos.each do |video| %>
@@ -66,4 +67,7 @@
   </p>
 </div>
 
+<% else %>
+  <h3>No Videos for this tutorial yet</h3>
+<% end %>
 </main>
