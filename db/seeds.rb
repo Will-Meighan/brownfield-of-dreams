@@ -121,3 +121,4 @@ User.create!(email: 'will@example.com', first_name: 'Will', last_name: 'Meighan'
 User.create!(email: 'kc@example.com', first_name: 'Khaki', last_name: 'C', password:  "password", role: :default)
 
 Friend.delete_all
+Tutorial.destroy_all
