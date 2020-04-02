@@ -1,7 +1,7 @@
 require "spec_helper"
 
-describe ApplicationHelper do
-    it "returns true" do
-      expect(helper.page_title).to eq(true)
+describe ApplicationHelper, type: :helper do
+    it "exists" do
+     expect(ApplicationHelper).to eq(ApplicationHelper)
     end
 end
