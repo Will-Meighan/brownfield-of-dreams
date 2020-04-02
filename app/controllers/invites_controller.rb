@@ -1,15 +1,16 @@
+# frozen_string_literal: true
+
 class InvitesController < ApplicationController
-  def new
-  end
+  def new; end
 
   def create
     invited = api_conn.get_user(params[:handle])
 
-    if invited.values.include?("Bad credentials")
-      flash[:failure] = "Please connect to github before sending invites"
+    if invited.values.include?('Bad credentials')
+      flash[:failure] = 'Please connect to github before sending invites'
     elsif !invited[:email].nil?
       send_invite(invited, current_user)
-      flash[:success] = "Successfully sent invite!"
+      flash[:success] = 'Successfully sent invite!'
     elsif invited[:email].nil?
       flash[:failure] = "The Github user you selected doesn't have an email address associated with their account."
     end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UserDashboardFacade
   attr_reader :token
 
@@ -38,5 +40,4 @@ class UserDashboardFacade
     # @user.friends
     Friend.joins(:user).where("user_id = #{@user.id}")
   end
-
 end

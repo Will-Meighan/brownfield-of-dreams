@@ -1,14 +1,16 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "Tutorials Index Page" do
+RSpec.describe 'Tutorials Index Page' do
   before :each do
-    @tutorial1 = create(:tutorial, title: "tutorial 1", description: "tutorial 1")
-    @tutorial2 = create(:tutorial, title: "tutorial 2", description: "tutorial 2", classroom: true)
-    @tutorial3 = create(:tutorial, title: "tutorial 3", description: "tutorial 3", classroom: true)
+    @tutorial1 = create(:tutorial, title: 'tutorial 1', description: 'tutorial 1')
+    @tutorial2 = create(:tutorial, title: 'tutorial 2', description: 'tutorial 2', classroom: true)
+    @tutorial3 = create(:tutorial, title: 'tutorial 3', description: 'tutorial 3', classroom: true)
   end
 
-  describe "as a visitor" do
-    it "I only see tutorials that are not classroom content" do
+  describe 'as a visitor' do
+    it 'I only see tutorials that are not classroom content' do
       visit tutorials_path
 
       expect(page).to have_css('.tutorial', count: 1)
@@ -26,8 +28,8 @@ RSpec.describe "Tutorials Index Page" do
     end
   end
 
-  describe "as a logged in user" do
-    it "I see all videos" do
+  describe 'as a logged in user' do
+    it 'I see all videos' do
       user = create(:user)
 
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)

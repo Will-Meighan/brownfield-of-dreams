@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FriendsController < ApplicationController
   def new
     friend = User.find_by(username: params[:handle])

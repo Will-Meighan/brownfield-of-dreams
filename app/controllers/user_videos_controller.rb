@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 class UserVideosController < ApplicationController
-  def new
-  end
+  def new; end
 
   def create
     if !current_user

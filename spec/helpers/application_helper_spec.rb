@@ -1,7 +1,9 @@
-require "spec_helper"
+# frozen_string_literal: true
+
+require 'spec_helper'
 
 describe ApplicationHelper, type: :helper do
-    it "exists" do
-     expect(ApplicationHelper).to eq(ApplicationHelper)
-    end
+  it 'exists' do
+    expect(ApplicationHelper).to eq(ApplicationHelper)
+  end
 end
